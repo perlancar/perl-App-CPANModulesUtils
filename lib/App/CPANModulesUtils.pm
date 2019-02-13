@@ -131,6 +131,41 @@ sub gen_acme_cpanmodules_module_from_acme_cpanlists_list {
     [200];
 }
 
+$SPEC{acme_cpanmodules_for} = {
+    v => 1.1,
+    summary => 'List Acme::CPANModules distributions that mention specified modules',
+    description => <<'_',
+
+This utility consults <prog:lcpan> (local indexed CPAN mirror) to check if there
+are <pm:Acme::CPANModules> distributions that mention specified modules. This is
+done by checking the presence of a dependency with the relationship
+`x_mentions`.
+
+_
+    args => {
+        modules => {
+            schema => ['array*', of=>'perl::modname*'],
+            req => 1,
+            pos => 0,
+            greedy => 1,
+        },
+    },
+
+};
+sub acme_cpanmodules_for {
+    require App::lcpan::Call;
+
+    my %args = @_;
+
+    my $res = App::lcpan::Call::call_lcpan_script(
+        argv => ["rdeps", "--rel", "x_mentions", @{ $args{modules} }],
+    );
+
+    return $res unless $res->[0] == 200;
+
+    return [200, "OK", [grep {/\AAcme-CPANModules/}
+                            map {$_->{dist}} @{ $res->[2] }]];
+}
 
 1;
 #ABSTRACT: Command-line utilities related to Acme::CPANModules
