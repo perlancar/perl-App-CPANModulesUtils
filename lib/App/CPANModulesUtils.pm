@@ -141,6 +141,9 @@ are <pm:Acme::CPANModules> distributions that mention specified modules. This is
 done by checking the presence of a dependency with the relationship
 `x_mentions`.
 
+See also <pm:App::lcpan> which has a "x-mentions-for-mod" subcommand that does
+the same thing.
+
 _
     args => {
         modules => {
@@ -149,11 +152,11 @@ _
             pos => 0,
             greedy => 1,
         },
-        links => [
-            {url=>'pm:App::lcpan', summary=>'lcpan also has a "x-mentions-for-mod" subcommand that does the same thing'},
-        ],
     },
-
+    links => [
+        # clashes with SEE ALSO in this POD
+        #{url=>'pm:App::lcpan', summary=>'lcpan also has a "x-mentions-for-mod" subcommand that does the same thing'},
+    ],
 };
 sub acme_cpanmodules_for {
     require App::lcpan::Call;

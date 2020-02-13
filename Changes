@@ -1,3 +1,10 @@
+0.004   2020-02-13  Released-By: PERLANCAR; Urgency: low
+
+	- No functional changes.
+
+	- [acme-cpanmodules-for CLI] Mention 'lcpan x-mentions-for-mod'.
+
+
 0.003   2019-02-13  Released-By: PERLANCAR
 
 	- Add utility: acme-cpanmodules-for.
