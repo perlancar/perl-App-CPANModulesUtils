@@ -149,6 +149,9 @@ _
             pos => 0,
             greedy => 1,
         },
+        links => [
+            {url=>'pm:App::lcpan', summary=>'lcpan also has a "x-mentions-for-mod" subcommand that does the same thing'},
+        ],
     },
 
 };
